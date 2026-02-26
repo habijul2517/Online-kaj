@@ -1,300 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-  <title>Online inkam 💸</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অনলাইন থেকে টাকা ইনকাম করুন</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #7f8c8d;
+            margin-bottom: 25px;
+        }
+        .share-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .btn {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            transition: 0.3s;
+        }
+        .whatsapp { background-color: #25D366; }
+        .messenger { background-color: #0084FF; }
+        .facebook { background-color: #1877F2; }
+        .btn:hover { opacity: 0.9; transform: translateY(-2px); }
 
-  <!-- Telegram SDK -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-  <!-- Monetag SDK -->
-      <script src='//libtl.com/sdk.js' data-zone='9615707' data-sdk='show_9615707'></script>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      color: white;
-      padding: 15px;
-    }
-    .container {
-      max-width: 500px;
-      margin: auto;
-    }
-    .card {
-      background: rgba(255,255,255,0.05);
-      padding: 20px;
-      border-radius: 15px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-    h2, h3 {
-      margin-top: 0;
-    }
-    .btn {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      background: #00e676;
-      color: #000;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    .btn-blue {
-      background: #448aff;
-      color: white;
-    }
-    .btn-orange {
-      background: #ff9100;
-      color: white;
-    }
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 8px;
-      border: none;
-      font-size: 15px;
-    }
-  </style>
+        #reward-section {
+            display: none; /* শুরুতে লুকানো থাকবে */
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px dashed #ddd;
+        }
+        .code-box {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e74c3c;
+            letter-spacing: 5px;
+            background: #fdf2f2;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .download-btn {
+            background-color: #2ecc71;
+            padding: 15px 30px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="card">
-      <h2>👋 Welcome <span id="userId">User</span></h2>
-      <p>💰 Balance: <span id="balance">0.00</span> ৳</p>
+
+<div class="container">
+    <h1>অনলাইন থেকে টাকা ইনকাম করুন</h1>
+    <p id="instruction">কোড এবং ডাউনলোড লিঙ্ক পেতে নিচের যেকোনো একটি মাধ্যমে শেয়ার করুন:</p>
+
+    <div class="share-buttons">
+        <a href="whatsapp://send?text=ফ্রিতে ট্রাফিক পেতে চান? TrafficPro প্ল্যাটফর্মে যোগ দিন। প্রতিদিন টাস্ক করে পয়েন্ট আয় করুন, মাত্র ১ মিনিটে ক্যাম্পেইন রান করুন এবং সরাসরি নিজের লিঙ্কে রিয়েল ভিজিটর নিয়ে আসুন। ব্লগ, CPA বা Adsterra — সব কিছুর জন্য উপযোগী।
+Bot: https://t.me/traffic_pro_bot⁠" 
+           class="btn whatsapp" onclick="showCode()">WhatsApp-এ শেয়ার করুন</a>
+
+        <a href="fb-messenger://share?link=https://t.me/traffic_pro_bot&app_id=123456789" 
+           class="btn messenger" onclick="showCode()">Messenger-এ শেয়ার করুন</a>
+
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://t.me/traffic_pro_bot" 
+           target="_blank" class="btn facebook" onclick="showCode()">Facebook-এ শেয়ার করুন</a>
     </div>
 
-    <div class="card">
-      <h3>🎬 Watch Ad & Earn</h3>
-      <p>➤ 0.25৳ per ad (16s), every 9th ad requires 2 minutes</p>
-      <p>➤ 20 ads every 40 minutes</p>
-      <button class="btn" onclick="watchAd()">▶️ Watch Ad</button>
+    <div id="reward-section">
+        <p>আপনার কোডটি নিচে দেওয়া হলো:</p>
+        <div class="code-box">1 2 3 4 5 6</div>
+        <br>
+        <a href="#" class="btn download-btn">এখনই ডাউনলোড করুন</a>
     </div>
-
-    <div class="card">
-      <h3>🌍 Visit Site & Earn</h3>
-      <p>➤ 0.5৳ per visit (1 minute)</p>
-      <button class="btn-blue" onclick="visitWebsite()">🌐 Visit Website</button>
-    </div>
-
-    <div class="card">
-      <h3>📤 Withdraw</h3>
-      <p>Minimum 300৳ required</p>
-      <input type="number" id="withdrawAmount" placeholder="Amount to withdraw" />
-      <select id="method">
-        <option value="Bkash">Bkash</option>
-        <option value="Nagad">Nagad</option>
-      </select>
-      <input type="text" id="wdNumber" placeholder="Your Bkash/Nagad Number" />
-      <button class="btn-orange" onclick="requestWithdraw()">🚀 Request Withdraw</button>
-    </div>
-
-    <div class="card">
-      <h3>🔗 Your Referral Link প্রতি রেফার ১০টাকা</h3>
-      <input type="text" id="refLink" readonly />
-      <button class="btn-blue" onclick="copyRef()">📋 Copy Referral Link</button>
-    </div>
-
-    <div class="card">
-      <h3>📊 Stats</h3>
-      <p>🎯 Ads Watched Today: <span id="adsToday">0</span></p>
-      <p>👥 Referral Commission: <span id="refCommission">0.00</span> ৳</p>
-      <p>🌐 Total Ads Watched: <span id="totalAds">0</span></p>
-      <button class="btn-blue" onclick="showDetails()">📖 Show Details</button>
-    </div>
-  </div>
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script src='//libtl.com/sdk.js' data-zone='9615707' data-sdk='show_9615707'></script>
+</div>
 
 <script>
-  const $ = id => document.getElementById(id);
-  const tg = window.Telegram.WebApp;
-  const userId = tg.initDataUnsafe?.user?.id?.toString() || "guest";
-  $("userId").innerText = userId;
-
-  // Firebase Config
-  const firebaseConfig = {
-    apiKey: "AIzaSyABPV6Ilx9G-5YLp5bk6YLyJ8uVcLm8fus",
-    authDomain: "azbot-a5066.firebaseapp.com",
-    databaseURL: "https://azbot-a5066-default-rtdb.firebaseio.com",
-    projectId: "azbot-a5066",
-    appId: "1:850012640650:android:5e19afd1a14f9c00392473"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
-  const userRef = db.ref("users/" + userId);
-
-  const today = new Date().toISOString().split("T")[0];
-  const REWARDS = { ad: 0.25, ref: 10.025, visit: 0.15 };
-  const LIMITS = { session: 20, cooldownMs: 40 * 60 * 1000 };
-  const referrerId = new URLSearchParams(window.location.search).get("ref");
-
-  let userData = {
-    balance: 0,
-    refCommission: 0,
-    adsWatchedToday: 0,
-    totalAds: 0,
-    cooldownUntil: 0,
-    lastAdDate: today
-  };
-
-  // Initial load from Firebase
-  userRef.once("value").then(snapshot => {
-    if (snapshot.exists()) {
-      const data = snapshot.val();
-      userData = { ...userData, ...data };
-
-      // Reset ad count if new day
-      if (userData.lastAdDate !== today) {
-        userData.adsWatchedToday = 0;
-        userData.cooldownUntil = 0;
-        userData.lastAdDate = today;
-        userRef.update({
-          adsWatchedToday: 0,
-          cooldownUntil: 0,
-          lastAdDate: today
-        });
-      }
-    } else {
-      userRef.set(userData);
+    function showCode() {
+        // ২ সেকেন্ড দেরি করে কোড দেখাবে যাতে ইউজার শেয়ার করার সময় পায়
+        setTimeout(function() {
+            document.getElementById('reward-section').style.display = 'block';
+            document.getElementById('instruction').innerText = "অভিনন্দন! আপনি কোডটি পেয়েছেন।";
+            document.querySelector('.share-buttons').style.display = 'none';
+        }, 2000);
     }
-
-    updateUI();
-  });
-
-  function updateUI() {
-    $("balance").innerText = userData.balance.toFixed(2);
-    $("adsToday").innerText = userData.adsWatchedToday;
-    $("refCommission").innerText = userData.refCommission.toFixed(2);
-    $("totalAds").innerText = userData.totalAds;
-    $("refLink").value = `https://t.me/Onlinekaj214bot?start=${userId}`;
-  }
-
-  function watchAd() {
-    const now = Date.now();
-
-    if (userData.cooldownUntil && now < userData.cooldownUntil) {
-      const minsLeft = Math.ceil((userData.cooldownUntil - now) / 60000);
-      return alert(`⏳ Please wait ${minsLeft} minutes before next session.`);
-    }
-
-    if (typeof show_9615707 !== "function") {
-      return alert("⚠️ Ad not loaded yet.");
-    }
-
-    if (userData.adsWatchedToday && userData.adsWatchedToday % LIMITS.session === 0) {
-      userData.cooldownUntil = now + LIMITS.cooldownMs;
-      userRef.update({ cooldownUntil: userData.cooldownUntil });
-      return alert("🔁 Session ended. Wait 41 minutes.");
-    }
-
-    show_9615707();
-
-    const isLongAd = userData.adsWatchedToday % 9 === 8;
-    const delay = isLongAd ? 45000 : 16000;
-    if (isLongAd) alert("⏳ Please watch this ad for 0.45 minutes.");
-
-    setTimeout(() => {
-      userData.balance += REWARDS.ad;
-      userData.adsWatchedToday++;
-      userData.totalAds++;
-
-      const updates = {
-        balance: userData.balance,
-        adsWatchedToday: userData.adsWatchedToday,
-        totalAds: userData.totalAds
-      };
-
-      userRef.update(updates);
-      updateUI();
-
-      if (referrerId && referrerId !== userId) {
-        const refUser = db.ref("users/" + referrerId);
-        refUser.once("value").then(snap => {
-          if (snap.exists()) {
-            const refData = snap.val();
-            const newRefBal = (refData.balance || 0) + REWARDS.ref;
-            const newRefCom = (refData.refCommission || 0) + REWARDS.ref;
-            refUser.update({
-              balance: newRefBal,
-              refCommission: newRefCom
-            });
-          }
-        });
-      }
-
-      alert(`✅ You earned 0.25৳ (Ad ${userData.adsWatchedToday})`);
-    }, delay);
-  }
-
-  function visitWebsite() {
-    window.open("https://otieu.com/4/9578063", "_blank");
-    setTimeout(() => {
-      userData.balance += REWARDS.visit;
-      userRef.update({ balance: userData.balance });
-      updateUI();
-      alert("✅ You earned 0.5৳ for visiting.");
-    }, 60000);
-  }
-function requestWithdraw() {
-  const amount = +$("withdrawAmount").value.trim();
-  const number = $("wdNumber").value.trim();
-  const method = $("method").value;
-
-  if (!amount || amount < 110) return alert("❌ Minimum withdraw is 110৳");
-  if (userData.balance < amount) return alert("❌ Insufficient balance.");
-  if (!number) return alert("❌ Enter your number.");
-
-  // 👉 রেফারেল সংখ্যা চেক করো
-  db.ref("referrals/" + userId).once("value").then(refSnap => {
-    const refCount = refSnap.exists() ? Object.keys(refSnap.val()).length : 0;
-
-    if (refCount < 5) {
-      return alert("❌ You need at least 5 referrals to withdraw.");
-    }
-
-    // ✅ রেফার সংখ্যা ঠিক থাকলে উইথড্রো প্রসেস করো
-    userData.balance -= amount;
-    userRef.update({ balance: userData.balance });
-    updateUI();
-
-    const withdrawRef = db.ref("withdraw_requests").push();
-    withdrawRef.set({
-      userId,
-      amount,
-      method,
-      number,
-      timestamp: Date.now()
-    });
-
-    alert(`✅ Withdraw request of ${amount}৳ sent to ${method}: ${number}`);
-  });
-}
-
-  
-
-  function copyRef() {
-    const input = $("refLink");
-    input.select();
-    input.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(input.value);
-    alert("✅ Referral link copied!");
-  }
-
-  function showDetails() {
-    alert(`📅 Ads Today: ${userData.adsWatchedToday}\n👥 Referral Earnings: ${userData.refCommission.toFixed(2)} ৳\n🌐 Total Ads: ${userData.totalAds}`);
-  }
 </script>
-
+<script src="https://pl28798753.effectivegatecpm.com/0a/15/cb/0a15cbe1c62404efb2319af99bc6e3fb.js"></script>
+  <script src="https://pl28798768.effectivegatecpm.com/3e/bf/20/3ebf202cd2bff84ce5759fd64a767494.js"></script>
 </body>
 </html>
